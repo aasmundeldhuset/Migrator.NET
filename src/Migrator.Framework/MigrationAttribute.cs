@@ -22,6 +22,7 @@ namespace Migrator.Framework
     {
         private long _version;
         private bool _ignore = false;
+        private int _timeout = 30;
 
         /// <summary>
         /// Describe the migration
@@ -48,6 +49,15 @@ namespace Migrator.Framework
         {
             get { return _ignore; }
             set { _ignore = value; }
+        }
+
+        /// <summary>
+        /// The timeout (in seconds) to use for each individual SQL command in this migration. Defaults to 30 seconds.
+        /// </summary>
+        public int Timeout
+        {
+            get { return _timeout; }
+            set { _timeout = value; }
         }
     }
 }

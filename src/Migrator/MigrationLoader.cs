@@ -111,6 +111,20 @@ namespace Migrator
             return attrib.Version;
         }
 
+        /// <summary>
+        /// Returns the timeout of the migration.
+        /// <see cref="MigrationAttribute">MigrationAttribute</see>.
+        /// </summary>
+        /// <param name="t">Migration type.</param>
+        /// <returns>Timeout sepcified in the attribute.</returns>
+        public static int GetMigrationTimeout(Type t)
+        {
+            MigrationAttribute attrib = (MigrationAttribute)
+                                        Attribute.GetCustomAttribute(t, typeof(MigrationAttribute));
+
+            return attrib.Timeout;
+        }
+
         public List<long> GetAvailableMigrations()
         {
         	//List<int> availableMigrations = new List<int>();

@@ -30,6 +30,7 @@ namespace Migrator.Providers
 		private ILogger _logger;
 		protected IDbConnection _connection;
 		private IDbTransaction _transaction;
+	    private int _timeout = 30;
 		private List<long> _appliedMigrations;
 
 		protected readonly string _connectionString;
@@ -52,6 +53,15 @@ namespace Migrator.Providers
 			get { return _logger; }
 			set { _logger = value; }
 		}
+
+		/// <summary>
+        /// The timeout (in seconds) to use for each individual SQL command in this migration. Defaults to 30 seconds.
+        /// </summary>
+        public int Timeout
+        {
+            get { return _timeout; }
+            set { _timeout = value; }
+        }
 
 		public Dialect Dialect
 		{
@@ -569,6 +579,7 @@ namespace Migrator.Providers
 		    IDbCommand cmd = _connection.CreateCommand();
             cmd.CommandText = sql;
             cmd.CommandType = CommandType.Text;
+            cmd.CommandTimeout = Timeout;
             if (_transaction != null)
             {
                 cmd.Transaction = _transaction;

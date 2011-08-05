@@ -462,6 +462,11 @@ namespace Migrator.Framework
         /// <returns></returns>
         int Update(string table, string[] columns, string[] values, string where);
         
+        /// <summary>
+        /// The timeout (in seconds) to use for each individual SQL command in this migration.
+        /// </summary>
+        int Timeout { get; set; }
+
         IDbCommand GetCommand();
 
         void ExecuteSchemaBuilder(SchemaBuilder.SchemaBuilder schemaBuilder);

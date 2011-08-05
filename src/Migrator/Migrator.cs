@@ -155,6 +155,7 @@ namespace Migrator
                         firstRun = false;
                     }
 
+                    _provider.Timeout = MigrationLoader.GetMigrationTimeout(migration.GetType());
                     migrate.Migrate(migration);
                 }
                 catch (Exception ex)
